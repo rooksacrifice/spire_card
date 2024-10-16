@@ -73,64 +73,43 @@
 <body>
     <div class="container">
         <h1>Slay the Spire Card List</h1>
-        <div class="card-grid">
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Strike</span>
-                    <span class="card-cost">1</span>
-                </div>
-                <div class="card-rarity common">Common</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Defend</span>
-                    <span class="card-cost">1</span>
-                </div>
-                <div class="card-rarity common">Common</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Bash</span>
-                    <span class="card-cost">2</span>
-                </div>
-                <div class="card-rarity common">Common</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Iron Wave</span>
-                    <span class="card-cost">1</span>
-                </div>
-                <div class="card-rarity uncommon">Uncommon</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Demon Form</span>
-                    <span class="card-cost">3</span>
-                </div>
-                <div class="card-rarity rare">Rare</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Whirlwind</span>
-                    <span class="card-cost">X</span>
-                </div>
-                <div class="card-rarity uncommon">Uncommon</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Bludgeon</span>
-                    <span class="card-cost">3</span>
-                </div>
-                <div class="card-rarity rare">Rare</div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <span class="card-name">Shrug It Off</span>
-                    <span class="card-cost">1</span>
-                </div>
-                <div class="card-rarity common">Common</div>
-            </div>
+        <div id="card-container" class="card-grid">
+            <!-- Cards will be dynamically inserted here -->
         </div>
     </div>
+
+    <script>
+        // This would be your JSON data converted from Excel
+        const cardData = [
+            { name: "Strike", cost: 1, rarity: "Common" },
+            { name: "Defend", cost: 1, rarity: "Common" },
+            { name: "Bash", cost: 2, rarity: "Common" },
+            { name: "Iron Wave", cost: 1, rarity: "Uncommon" },
+            { name: "Demon Form", cost: 3, rarity: "Rare" },
+            { name: "Whirlwind", cost: "X", rarity: "Uncommon" },
+            { name: "Bludgeon", cost: 3, rarity: "Rare" },
+            { name: "Shrug It Off", cost: 1, rarity: "Common" }
+        ];
+
+        function createCardElement(card) {
+            return `
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-name">${card.name}</span>
+                        <span class="card-cost">${card.cost}</span>
+                    </div>
+                    <div class="card-rarity ${card.rarity.toLowerCase()}">${card.rarity}</div>
+                </div>
+            `;
+        }
+
+        function renderCards() {
+            const cardContainer = document.getElementById('card-container');
+            cardContainer.innerHTML = cardData.map(createCardElement).join('');
+        }
+
+        // Render cards when the page loads
+        window.onload = renderCards;
+    </script>
 </body>
 </html>
